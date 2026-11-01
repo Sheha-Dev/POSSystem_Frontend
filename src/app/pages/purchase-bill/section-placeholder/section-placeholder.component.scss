@@ -1,0 +1,29 @@
+.section-placeholder {
+  display: grid;
+  min-height: 18rem;
+  align-content: center;
+  justify-items: center;
+  padding: 2rem;
+  color: var(--app-muted);
+  text-align: center;
+}
+
+.section-kicker {
+  margin-bottom: 0.5rem;
+  color: var(--app-primary);
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+}
+
+h2 {
+  margin: 0;
+  color: var(--app-text);
+  font-size: 1.4rem;
+  font-weight: 650;
+}
+
+p {
+  margin: 0.65rem 0 0;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,44 @@
+.details-layout {
+  min-height: calc(100vh - 8.5rem);
+  padding: clamp(0.75rem, 1.5vw, 1.5rem);
+  border: 1px solid var(--app-border);
+  border-radius: 0.8rem;
+  background: var(--app-surface);
+}
+
+.details-tabs {
+  display: flex;
+  width: fit-content;
+  min-height: 2.35rem;
+  align-items: stretch;
+  gap: 0.2rem;
+  margin-bottom: 1.35rem;
+  border-bottom: 1px solid var(--app-border);
+}
+
+.details-tabs a {
+  position: relative;
+  display: flex;
+  min-width: 5rem;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 1rem;
+  color: var(--app-muted);
+  font-size: 0.84rem;
+  text-decoration: none;
+}
+
+.details-tabs a.is-active,
+.details-tabs a:hover {
+  color: var(--app-primary);
+}
+
+.details-tabs a.is-active::after {
+  position: absolute;
+  right: 0.6rem;
+  bottom: -1px;
+  left: 0.6rem;
+  height: 2px;
+  background: var(--app-primary);
+  content: '';
+}

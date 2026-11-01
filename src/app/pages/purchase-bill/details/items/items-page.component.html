@@ -1,0 +1,7 @@
+<div class="items-layout">
+  <section class="items-main" aria-label="Purchase bill items">
+    <app-item-entry-form (lineAdded)="addLine($event)" />
+    <app-items-table [lines]="lines()" />
+  </section>
+  <app-purchase-summary [lines]="lines()" />
+</div>

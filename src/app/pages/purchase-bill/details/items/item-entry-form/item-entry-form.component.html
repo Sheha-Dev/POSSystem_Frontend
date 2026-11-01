@@ -1,0 +1,86 @@
+<form class="item-entry" [formGroup]="itemForm" (ngSubmit)="addItem()" novalidate>
+  <div class="form-grid">
+    <div class="field item-field">
+      <label for="bill-item">Item <span class="required-mark">*</span></label>
+      @if (itemNames$ | async; as itemNames) {
+        <app-autocomplete-dropdown
+          inputId="bill-item"
+          ariaLabel="Item"
+          [options]="itemNames"
+          [required]="true"
+          [errorMessage]="fieldError('itemName')"
+          placeholder="Search items"
+          formControlName="itemName"
+        />
+      } @else {
+        <input class="form-control form-control-sm" type="text" disabled placeholder="Loading items…" />
+      }
+    </div>
+
+    <div class="field batch-field">
+      <label for="bill-location">Batch <span class="required-mark">*</span></label>
+      <app-autocomplete-dropdown
+        inputId="bill-location"
+        ariaLabel="Batch location"
+        [options]="locationOptions()"
+        [loading]="locationsLoading()"
+        [required]="true"
+        [errorMessage]="fieldError('locationId')"
+        placeholder="Search locations"
+        formControlName="locationId"
+      />
+      @if (locationsError(); as error) {
+        <small class="field-error">{{ error }}</small>
+      }
+    </div>
+
+    <div class="field">
+      <label for="standard-cost">Standard Cost</label>
+      <input id="standard-cost" class="form-control form-control-sm" type="number" min="0" step="0.01" formControlName="standardCost" />
+      @if (numberError('standardCost'); as error) { <small class="field-error">{{ error }}</small> }
+    </div>
+
+    <div class="field">
+      <label for="standard-price">Standard Price</label>
+      <input id="standard-price" class="form-control form-control-sm" type="number" min="0" step="0.01" formControlName="standardPrice" />
+      @if (numberError('standardPrice'); as error) { <small class="field-error">{{ error }}</small> }
+    </div>
+
+    <div class="field calculated-field">
+      <label for="item-margin">Margin</label>
+      <input id="item-margin" class="form-control form-control-sm" type="number" formControlName="margin" />
+    </div>
+
+    <div class="field compact-field">
+      <label for="item-quantity">Qty</label>
+      <input id="item-quantity" class="form-control form-control-sm" type="number" min="0.0001" step="0.01" formControlName="quantity" [class.is-invalid]="fieldError('quantity')" />
+      @if (fieldError('quantity'); as error) { <small class="field-error">{{ error }}</small> }
+    </div>
+
+    <div class="field compact-field">
+      <label for="free-quantity">Free Qty</label>
+      <input id="free-quantity" class="form-control form-control-sm" type="number" min="0" step="0.01" formControlName="freeQuantity" />
+      @if (numberError('freeQuantity'); as error) { <small class="field-error">{{ error }}</small> }
+    </div>
+
+    <div class="field compact-field">
+      <label for="item-discount">Discount %</label>
+      <input id="item-discount" class="form-control form-control-sm" type="number" min="0" max="100" step="0.01" formControlName="discountPercent" [class.is-invalid]="fieldError('discountPercent')" />
+      @if (fieldError('discountPercent'); as error) { <small class="field-error">{{ error }}</small> }
+    </div>
+
+    <div class="field calculated-field">
+      <label for="total-cost">Total Cost</label>
+      <input id="total-cost" class="form-control form-control-sm" type="number" formControlName="totalCost" />
+    </div>
+
+    <div class="field calculated-field">
+      <label for="total-selling">Total Selling</label>
+      <input id="total-selling" class="form-control form-control-sm" type="number" formControlName="totalSelling" />
+    </div>
+
+    <button class="btn btn-success add-button" type="submit" [disabled]="locationsLoading() || locations().length === 0">
+      <span aria-hidden="true">+</span> Add item
+    </button>
+  </div>
+</form>

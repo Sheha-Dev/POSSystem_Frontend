@@ -1,0 +1,64 @@
+.items-table-section {
+  min-width: 0;
+}
+
+.table-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.55rem;
+}
+
+.table-heading h2 {
+  margin: 0;
+  color: var(--app-text);
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.table-heading span {
+  color: #87919b;
+  font-size: 0.72rem;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--app-border);
+  border-radius: 0.45rem;
+}
+
+table {
+  min-width: 58rem;
+  font-size: 0.73rem;
+}
+
+thead th {
+  padding: 0.65rem 0.55rem;
+  border-bottom-color: var(--app-border);
+  color: var(--app-primary);
+  font-size: 0.68rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: 0.65rem 0.55rem;
+  color: var(--app-muted);
+  white-space: nowrap;
+}
+
+.numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.empty-state {
+  display: grid;
+  min-height: 6rem;
+  place-items: center;
+  border: 1px dashed var(--app-border);
+  border-radius: 0.45rem;
+  color: var(--app-muted);
+  font-size: 0.8rem;
+  text-align: center;
+}

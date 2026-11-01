@@ -1,0 +1,23 @@
+<main class="purchase-workspace">
+  <header class="purchase-toolbar">
+    <div class="title-group">
+      <span class="info-mark" aria-hidden="true">i</span>
+      <div>
+        <h1>Purchase Bill</h1>
+        <p>Enter information for the purchase bill</p>
+      </div>
+    </div>
+    <span class="secure-label"><span class="secure-dot" aria-hidden="true"></span> Secure session</span>
+  </header>
+
+  <nav class="primary-tabs" aria-label="Purchase bill sections">
+    <a routerLink="/purchase-bill/header" routerLinkActive="is-active">Header</a>
+    <a routerLink="/purchase-bill/details" routerLinkActive="is-active">Details</a>
+    <a routerLink="/purchase-bill/notes" routerLinkActive="is-active">Notes</a>
+    <a routerLink="/purchase-bill/documents" routerLinkActive="is-active">Documents</a>
+  </nav>
+
+  <section class="purchase-content" aria-label="Purchase bill content">
+    <router-outlet />
+  </section>
+</main>

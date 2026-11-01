@@ -1,0 +1,27 @@
+<aside class="summary-card" aria-label="Purchase summary">
+  <section class="summary-section">
+    <h2><span class="summary-icon blue" aria-hidden="true">▤</span> Summary</h2>
+    <h3>Item Summary</h3>
+    <div class="summary-row"><span>Total Items</span><strong>{{ summary().itemCount | number:'1.0-0' }}</strong></div>
+    <div class="summary-row"><span>Total Quantity</span><strong>{{ summary().quantity | number:'1.0-2' }}</strong></div>
+  </section>
+
+  <section class="summary-section">
+    <h3><span class="summary-icon" aria-hidden="true">$</span> Financial Summary</h3>
+    <div class="summary-row"><span>Cost Before Discount</span><strong>{{ summary().costBeforeDiscount | currency:'LKR':'symbol':'1.2-2' }}</strong></div>
+    <div class="summary-row"><span>Item Discount</span><strong>{{ summary().totalDiscount | currency:'LKR':'symbol':'1.2-2' }}</strong></div>
+    <div class="summary-row"><span>Total Cost</span><strong>{{ summary().totalCost | currency:'LKR':'symbol':'1.2-2' }}</strong></div>
+    <div class="summary-row"><span>Total Selling</span><strong>{{ summary().totalSelling | currency:'LKR':'symbol':'1.2-2' }}</strong></div>
+  </section>
+
+  <section class="summary-section tax-note">
+    <h3><span class="summary-icon" aria-hidden="true">◇</span> Tax Summary</h3>
+    <p>Taxes can be entered in the Taxes section.</p>
+  </section>
+
+  <section class="net-total">
+    <span>Estimated Selling Total</span>
+    <strong>{{ summary().totalSelling | currency:'LKR':'symbol':'1.2-2' }}</strong>
+    <small>Tax not included</small>
+  </section>
+</aside>

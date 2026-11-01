@@ -1,0 +1,45 @@
+<section class="items-table-section" aria-labelledby="items-table-heading">
+  <div class="table-heading">
+    <h2 id="items-table-heading">Items added</h2>
+    <span>{{ lines().length }} {{ lines().length === 1 ? 'item' : 'items' }}</span>
+  </div>
+
+  @if (lines().length === 0) {
+    <div class="empty-state">Items you add to this bill will appear here.</div>
+  } @else {
+    <div class="table-scroll">
+      <table class="table table-sm align-middle mb-0">
+        <thead>
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Batch</th>
+            <th scope="col" class="numeric">Standard Cost</th>
+            <th scope="col" class="numeric">Standard Price</th>
+            <th scope="col" class="numeric">Margin</th>
+            <th scope="col" class="numeric">Qty</th>
+            <th scope="col" class="numeric">Free Qty</th>
+            <th scope="col" class="numeric">Discount</th>
+            <th scope="col" class="numeric">Total Cost</th>
+            <th scope="col" class="numeric">Total Selling</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (line of lines(); track line.id) {
+            <tr>
+              <td>{{ line.itemName }}</td>
+              <td>{{ line.locationName }}</td>
+              <td class="numeric">{{ line.standardCost | number:'1.2-2' }}</td>
+              <td class="numeric">{{ line.standardPrice | number:'1.2-2' }}</td>
+              <td class="numeric">{{ line.margin | number:'1.2-2' }}</td>
+              <td class="numeric">{{ line.quantity | number:'1.0-2' }}</td>
+              <td class="numeric">{{ line.freeQuantity | number:'1.0-2' }}</td>
+              <td class="numeric">{{ line.discountPercent | number:'1.0-2' }}%</td>
+              <td class="numeric">{{ line.totalCost | number:'1.2-2' }}</td>
+              <td class="numeric">{{ line.totalSelling | number:'1.2-2' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>
