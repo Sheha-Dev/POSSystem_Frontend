@@ -1,0 +1,108 @@
+<main class="login-page">
+  <section class="login-panel" aria-labelledby="login-heading">
+    <div class="brand-panel">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true">V</div>
+        <span>VINDIKA <span class="brand-light">POS</span></span>
+      </div>
+
+      <div class="brand-copy">
+        <span class="eyebrow">POINT OF SALE</span>
+        <h1>Everything in<br />its right place.</h1>
+        <p>Manage your locations and keep daily operations moving with confidence.</p>
+      </div>
+
+      <div class="brand-footer">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Secure workspace access</span>
+      </div>
+      <div class="brand-orbit brand-orbit-one" aria-hidden="true"></div>
+      <div class="brand-orbit brand-orbit-two" aria-hidden="true"></div>
+    </div>
+
+    <div class="form-panel">
+      <div class="form-content">
+        <div class="mobile-brand" aria-label="Vindika POS">
+          <div class="brand-mark" aria-hidden="true">V</div>
+          <span>VINDIKA <span class="brand-light">POS</span></span>
+        </div>
+
+        <header class="form-heading">
+            <span class="eyebrow">WELCOME BACK</span>
+            <h2 id="login-heading">Sign in to continue</h2>
+            <p>Enter your account details to access your workspace.</p>
+          </header>
+
+          <form [formGroup]="loginForm" (ngSubmit)="submit()" novalidate>
+            <div class="field-group">
+              <label for="username" class="form-label">Username</label>
+              <input
+                id="username"
+                class="form-control login-input"
+                type="text"
+                maxlength="200"
+                formControlName="username"
+                autocomplete="username"
+                placeholder="Enter your username"
+                [class.is-invalid]="loginForm.controls.username.touched && loginForm.controls.username.invalid"
+                [attr.aria-invalid]="loginForm.controls.username.touched && loginForm.controls.username.invalid"
+                [attr.aria-describedby]="loginForm.controls.username.touched && loginForm.controls.username.invalid ? 'username-error' : null"
+              />
+              @if (loginForm.controls.username.touched && loginForm.controls.username.hasError('required')) {
+                <div id="username-error" class="invalid-feedback">Enter your username.</div>
+              } @else if (loginForm.controls.username.touched && loginForm.controls.username.hasError('maxlength')) {
+                <div id="username-error" class="invalid-feedback">Username must be 200 characters or fewer.</div>
+              }
+            </div>
+
+            <div class="field-group">
+              <label for="password" class="form-label">Password</label>
+              <div class="password-field">
+                <input
+                  id="password"
+                  class="form-control login-input"
+                  [type]="passwordVisible() ? 'text' : 'password'"
+                  maxlength="200"
+                  formControlName="password"
+                  autocomplete="current-password"
+                  placeholder="Enter your password"
+                  [class.is-invalid]="loginForm.controls.password.touched && loginForm.controls.password.invalid"
+                  [attr.aria-invalid]="loginForm.controls.password.touched && loginForm.controls.password.invalid"
+                  [attr.aria-describedby]="loginForm.controls.password.touched && loginForm.controls.password.invalid ? 'password-error' : null"
+                />
+                <button
+                  class="password-toggle"
+                  type="button"
+                  [attr.aria-label]="passwordVisible() ? 'Hide password' : 'Show password'"
+                  (click)="togglePasswordVisibility()"
+                >
+                  {{ passwordVisible() ? 'Hide' : 'Show' }}
+                </button>
+              </div>
+              @if (loginForm.controls.password.touched && loginForm.controls.password.hasError('required')) {
+                <div id="password-error" class="invalid-feedback d-block">Enter your password.</div>
+              } @else if (loginForm.controls.password.touched && loginForm.controls.password.hasError('maxlength')) {
+                <div id="password-error" class="invalid-feedback d-block">Password must be 200 characters or fewer.</div>
+              }
+            </div>
+
+            <button class="btn btn-primary submit-button" type="submit" [disabled]="isSubmitting()">
+              @if (isSubmitting()) {
+                <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                <span>Signing in…</span>
+              } @else {
+                <span>Sign in</span>
+                <span class="button-arrow" aria-hidden="true">→</span>
+              }
+            </button>
+          </form>
+
+        <p class="security-note">
+            <span aria-hidden="true">▣</span>
+            Your sign-in is protected by a secure session.
+        </p>
+      </div>
+      <footer class="form-footer">© 2026 Vindika POS <span>·</span> Built for your business</footer>
+    </div>
+  </section>
+</main>
