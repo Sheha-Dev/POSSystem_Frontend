@@ -1,0 +1,28 @@
+@use 'bootstrap/scss/bootstrap';
+
+:root,
+[data-bs-theme='light'] {
+  color-scheme: light;
+  --app-background: #f5f7f9;
+  --app-surface: #ffffff;
+  --app-text: #27313d;
+  --app-muted: #687481;
+  --app-border: #dfe4e8;
+  --app-primary: #326ac0;
+}
+
+[data-bs-theme='dark'] {
+  color-scheme: dark;
+  --app-background: #111817;
+  --app-surface: #1b2422;
+  --app-text: #e8efeb;
+  --app-muted: #a9b6b0;
+  --app-border: #364440;
+  --app-primary: #8cb5ed;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--app-background);
+  color: var(--app-text);
+}
