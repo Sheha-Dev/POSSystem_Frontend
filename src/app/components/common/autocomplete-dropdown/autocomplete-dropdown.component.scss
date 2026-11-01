@@ -1,0 +1,109 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.autocomplete {
+  position: relative;
+}
+
+.input-wrap {
+  display: flex;
+  min-height: 2.35rem;
+  align-items: center;
+  border: 1px solid var(--bs-border-color, #d9dfe4);
+  border-radius: 0.35rem;
+  background: var(--bs-body-bg, #fff);
+}
+
+.input-wrap:focus-within {
+  border-color: #5783c4;
+  box-shadow: 0 0 0 0.15rem rgba(50, 106, 192, 0.12);
+}
+
+.input-wrap.has-error {
+  border-color: var(--bs-form-invalid-border-color, #dc3545);
+}
+
+.input-wrap.is-disabled {
+  background: var(--bs-secondary-bg, #e9ecef);
+  opacity: 0.8;
+}
+
+.input-wrap input {
+  width: 100%;
+  min-width: 0;
+  align-self: stretch;
+  padding: 0.35rem 0.65rem;
+  border: 0;
+  border-radius: inherit;
+  outline: 0;
+  color: var(--bs-body-color, #27313d);
+  background: transparent;
+  font: inherit;
+  font-size: 0.78rem;
+}
+
+.input-wrap input::placeholder {
+  color: var(--bs-secondary-color, #6c757d);
+  opacity: 0.72;
+}
+
+.chevron,
+.clear-button,
+.spinner-border {
+  flex: 0 0 auto;
+  margin-inline: 0.6rem;
+  color: var(--bs-secondary-color, #6c757d);
+}
+
+.clear-button {
+  padding: 0 0.15rem;
+  border: 0;
+  background: transparent;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.options-list {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 0.25rem);
+  right: 0;
+  left: 0;
+  max-height: 15rem;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0.25rem;
+  border: 1px solid var(--bs-border-color, #d9dfe4);
+  border-radius: 0.45rem;
+  background: var(--bs-body-bg, #fff);
+  box-shadow: 0 0.6rem 1.5rem rgba(18, 30, 39, 0.14);
+  color: var(--bs-body-color, #27313d);
+  list-style: none;
+}
+
+.option {
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.option:hover,
+.option.is-active {
+  background: var(--bs-tertiary-bg, #f1f4f7);
+}
+
+.option-message,
+.autocomplete-error {
+  display: block;
+  padding: 0.55rem 0.65rem;
+  color: var(--bs-secondary-color, #6c757d);
+  font-size: 0.75rem;
+}
+
+.autocomplete-error {
+  padding: 0.25rem 0 0;
+  color: var(--bs-form-invalid-color, #dc3545);
+}

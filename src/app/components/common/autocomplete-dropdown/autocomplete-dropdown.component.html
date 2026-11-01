@@ -1,0 +1,58 @@
+<div class="autocomplete" (focusout)="closeOptions()">
+  <div class="input-wrap" [class.has-error]="errorMessage" [class.is-disabled]="isDisabled()">
+    <input
+      [id]="inputId"
+      type="text"
+      role="combobox"
+      aria-autocomplete="list"
+      [attr.aria-label]="ariaLabel"
+      [attr.aria-expanded]="isOpen()"
+      [attr.aria-controls]="inputId + '-listbox'"
+      [attr.aria-activedescendant]="isOpen() && filteredOptions().length ? inputId + '-option-' + activeIndex() : null"
+      [attr.aria-required]="required"
+      [attr.aria-invalid]="!!errorMessage"
+      [attr.aria-describedby]="errorMessage ? inputId + '-error' : null"
+      [placeholder]="loading ? 'Loading…' : placeholder"
+      [value]="searchText()"
+      [disabled]="isDisabled()"
+      (input)="updateSearch($event)"
+      (focus)="openOptions()"
+      (keydown)="handleKeydown($event)"
+    />
+    @if (loading) {
+      <span class="spinner-border spinner-border-sm" aria-label="Loading options"></span>
+    } @else if (allowClear && selectedValue()) {
+      <button class="clear-button" type="button" aria-label="Clear selection" (mousedown)="$event.preventDefault()" (click)="clearSelection()">×</button>
+    } @else {
+      <span class="chevron" aria-hidden="true">⌄</span>
+    }
+  </div>
+
+  @if (errorMessage) {
+    <small class="autocomplete-error" [id]="inputId + '-error'">{{ errorMessage }}</small>
+  }
+
+  @if (isOpen() && !isDisabled()) {
+    <ul class="options-list" role="listbox" [id]="inputId + '-listbox'">
+      @if (loading) {
+        <li class="option-message" role="status">Loading options…</li>
+      } @else if (filteredOptions().length === 0) {
+        <li class="option-message" role="status">No results found.</li>
+      } @else {
+        @for (option of filteredOptions(); track option.value; let index = $index) {
+          <li
+            class="option"
+            role="option"
+            [id]="inputId + '-option-' + index"
+            [attr.aria-selected]="selectedValue() === option.value"
+            [class.is-active]="activeIndex() === index"
+            (mousedown)="$event.preventDefault()"
+            (click)="selectOption(option)"
+          >
+            {{ option.label }}
+          </li>
+        }
+      }
+    </ul>
+  }
+</div>
