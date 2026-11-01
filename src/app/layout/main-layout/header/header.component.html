@@ -1,0 +1,62 @@
+<header class="app-header">
+  <a class="brand" routerLink="/purchase-bill/details/items" aria-label="Vindika POS home">
+    <span class="brand-mark" aria-hidden="true">V</span>
+    <span>VINDIKA <span>POS</span></span>
+  </a>
+
+  <button
+    class="mobile-menu-toggle"
+    type="button"
+    [attr.aria-expanded]="isMenuOpen()"
+    aria-controls="app-navigation"
+    aria-label="Toggle navigation"
+    (click)="isMenuOpen.update((open) => !open)"
+  >
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav id="app-navigation" class="app-navigation" [class.is-open]="isMenuOpen()" aria-label="Main navigation">
+    <a routerLink="/purchase-bill/details/items" routerLinkActive="is-active" (click)="isMenuOpen.set(false)">
+      Purchase Bill
+    </a>
+  </nav>
+
+  <div class="header-actions">
+    <button
+      class="header-icon-button theme-button"
+      type="button"
+      [attr.aria-label]="themeService.currentTheme() === 'light' ? 'Switch to dark mode' : 'Switch to light mode'"
+      [title]="themeService.currentTheme() === 'light' ? 'Switch to dark mode' : 'Switch to light mode'"
+      (click)="themeService.toggleTheme()"
+    >
+      @if (themeService.currentTheme() === 'light') { <span aria-hidden="true">☾</span> }
+      @else { <span aria-hidden="true">☀</span> }
+    </button>
+
+    <div class="profile-menu">
+      <button
+        class="profile-trigger"
+        type="button"
+        [attr.aria-expanded]="isProfileOpen()"
+        aria-haspopup="menu"
+        (click)="isProfileOpen.update((open) => !open)"
+      >
+        <span class="avatar" aria-hidden="true">{{ (authSession.username() ?? 'A').slice(0, 1).toUpperCase() }}</span>
+        <span class="profile-name">{{ authSession.username() ?? 'Account' }}</span>
+        <span class="profile-chevron" aria-hidden="true">⌄</span>
+      </button>
+
+      @if (isProfileOpen()) {
+        <div class="profile-dropdown" role="menu">
+          <div class="profile-detail">
+            <span class="profile-detail-label">Signed in as</span>
+            <strong>{{ authSession.username() ?? 'Authenticated user' }}</strong>
+          </div>
+          <button class="logout-action" type="button" role="menuitem" [disabled]="isLoggingOut()" (click)="logout()">
+            @if (isLoggingOut()) { Signing out… } @else { Sign out }
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+</header>
