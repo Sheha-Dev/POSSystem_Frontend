@@ -7,6 +7,19 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/login/login.component').then((page) => page.LoginPage)
   },
   {
+    path: 'dashboard',
+    canActivate: [authGuard],
+    loadComponent: () => import('./layout/main-layout/main-layout.component')
+      .then((page) => page.MainLayoutComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./pages/dashboard/dashboard.component')
+          .then((page) => page.DashboardComponent)
+      }
+    ]
+  },
+  {
     path: 'purchase-bill',
     canActivateChild: [authGuard],
     children: [

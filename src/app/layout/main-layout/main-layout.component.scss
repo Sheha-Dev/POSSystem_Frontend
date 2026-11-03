@@ -10,7 +10,81 @@
   background: var(--app-background);
 }
 
+.workspace {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.side-menu {
+  display: flex;
+  width: 15rem;
+  flex: 0 0 15rem;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.5rem 0.85rem;
+  border-right: 1px solid var(--app-border);
+  background: var(--app-surface);
+}
+
+.menu-label {
+  margin: 0.25rem 0.55rem 0.4rem;
+  color: var(--app-muted);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.side-menu a {
+  display: flex;
+  min-height: 2.7rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 0.55rem;
+  color: var(--app-muted);
+  font-size: 0.82rem;
+  font-weight: 550;
+  text-decoration: none;
+}
+
+.side-menu a:hover,
+.side-menu a.is-active {
+  color: var(--app-primary);
+  background: color-mix(in srgb, var(--app-primary) 10%, var(--app-surface));
+}
+
+.menu-icon {
+  display: grid;
+  width: 1.45rem;
+  place-items: center;
+  font-size: 1.15rem;
+}
+
 .main-content {
   flex: 1;
   min-width: 0;
+}
+
+@media (max-width: 720px) {
+  .side-menu {
+    width: 3.7rem;
+    flex-basis: 3.7rem;
+    align-items: center;
+    padding: 1rem 0.4rem;
+  }
+
+  .menu-label,
+  .side-menu a:not(.is-active) {
+    font-size: 0;
+  }
+
+  .side-menu a {
+    width: 2.75rem;
+    justify-content: center;
+    padding: 0.55rem;
+    font-size: 0;
+  }
+
+  .menu-icon { font-size: 1.15rem; }
 }

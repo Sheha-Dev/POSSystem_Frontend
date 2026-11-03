@@ -1,0 +1,80 @@
+<section class="dashboard-page">
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">OVERVIEW</p>
+      <h1>Dashboard</h1>
+      <p class="page-description">A quick view of your recent purchasing activity.</p>
+    </div>
+    <span class="updated-label"><span class="status-dot"></span> Live data</span>
+  </header>
+
+  @if (isLoading()) {
+    <div class="loading-state" role="status"><span class="spinner-border spinner-border-sm" aria-hidden="true"></span> Loading purchase data…</div>
+  } @else if (errorMessage()) {
+    <div class="alert alert-warning" role="alert">{{ errorMessage() }}</div>
+  } @else {
+    <div class="dashboard-grid">
+      <section class="dashboard-card orders-card" aria-labelledby="recent-orders-title">
+        <div class="card-heading">
+          <div><p class="eyebrow">PURCHASING</p><h2 id="recent-orders-title">Recent purchase orders</h2></div>
+          <span class="card-count">{{ latestOrders().length }} recent</span>
+        </div>
+        @if (latestOrders().length) {
+          <div class="table-responsive">
+            <table class="table dashboard-table align-middle mb-0">
+              <thead><tr><th scope="col">Bill ID</th><th scope="col" class="text-end">Total qty</th><th scope="col" class="text-end">Items</th><th scope="col" class="text-end">Net total</th></tr></thead>
+              <tbody>
+                @for (order of latestOrders(); track order.billId) {
+                  <tr>
+                    <td><span class="bill-reference">{{ order.billId }}</span><small>{{ order.createdDate | date:'mediumDate' }}</small></td>
+                    <td class="text-end">{{ order.totalQty | number:'1.0-3' }}</td>
+                    <td class="text-end">{{ order.totalItems }}</td>
+                    <td class="text-end amount">{{ order.netTotal | number:'1.2-2' }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        } @else { <p class="empty-state">Saved purchase orders will appear here.</p> }
+      </section>
+
+      <section class="dashboard-card items-card" aria-labelledby="recent-items-title">
+        <div class="card-heading">
+          <div><p class="eyebrow">ACTIVITY</p><h2 id="recent-items-title">Latest items</h2></div>
+          <span class="card-count">{{ latestItems().length }} recent</span>
+        </div>
+        @if (latestItems().length) {
+          <div class="table-responsive">
+            <table class="table dashboard-table align-middle mb-0">
+              <thead><tr><th scope="col">Bill ID</th><th scope="col">Item</th><th scope="col" class="text-end">Qty</th></tr></thead>
+              <tbody>
+                @for (item of latestItems(); track item.billItemId) {
+                  <tr><td><span class="bill-reference">{{ item.billId }}</span></td><td class="item-name">{{ item.item }}</td><td class="text-end">{{ item.qty + item.freeQty | number:'1.0-3' }}</td></tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        } @else { <p class="empty-state">Purchase order items will appear here.</p> }
+      </section>
+
+      <section class="dashboard-card chart-card" aria-labelledby="item-breakdown-title">
+        <div class="card-heading">
+          <div><p class="eyebrow">INVENTORY MIX</p><h2 id="item-breakdown-title">Quantity by item</h2></div>
+          <span class="card-count">{{ itemQuantities().length }} item names</span>
+        </div>
+        @if (itemQuantities().length) {
+          <div class="chart-content">
+            <div class="donut-wrap" role="img" [attr.aria-label]="'Purchased quantity totals ' + chartTotal() + ' units across ' + itemQuantities().length + ' item names'">
+              <div class="donut" [style.background]="chartBackground()"><div class="donut-center"><strong>{{ chartTotal() | number:'1.0-0' }}</strong><span>units</span></div></div>
+            </div>
+            <ul class="chart-legend">
+              @for (item of itemQuantities(); track item.name) {
+                <li><span class="legend-swatch" [style.backgroundColor]="item.color"></span><span class="legend-name">{{ item.name }}</span><strong>{{ item.quantity | number:'1.0-3' }}</strong><small>{{ item.percent | number:'1.0-1' }}%</small></li>
+              }
+            </ul>
+          </div>
+        } @else { <p class="empty-state">The item breakdown will appear after your first saved order.</p> }
+      </section>
+    </div>
+  }
+</section>

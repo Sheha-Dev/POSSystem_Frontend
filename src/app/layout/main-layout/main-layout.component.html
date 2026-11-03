@@ -1,7 +1,18 @@
 <div class="main-layout">
   <app-header />
-  <main class="main-content">
-    <router-outlet />
-  </main>
+  <div class="workspace">
+    <aside class="side-menu" aria-label="Workspace navigation">
+      <p class="menu-label">WORKSPACE</p>
+      <a routerLink="/dashboard" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" aria-label="Dashboard">
+        <span class="menu-icon" aria-hidden="true">⌂</span> Dashboard
+      </a>
+      <a routerLink="/purchase-bill/details/items" routerLinkActive="is-active" aria-label="Purchase order">
+        <span class="menu-icon" aria-hidden="true">＋</span> Purchase order
+      </a>
+    </aside>
+    <main class="main-content">
+      <router-outlet />
+    </main>
+  </div>
   <app-footer />
 </div>

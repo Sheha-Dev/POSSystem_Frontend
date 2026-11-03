@@ -9,8 +9,41 @@
   min-width: 0;
 }
 
+.submit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--app-border);
+  border-radius: 0.7rem;
+  background: var(--app-surface);
+}
+
+.submit-hint {
+  color: var(--app-muted);
+  font-size: 0.75rem;
+}
+
+.submit-button {
+  display: inline-flex;
+  min-height: 2.55rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding-inline: 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
 @media (max-width: 991.98px) {
   .items-layout {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+@media (max-width: 520px) {
+  .submit-row { align-items: stretch; flex-direction: column; }
+  .submit-button { width: 100%; }
 }

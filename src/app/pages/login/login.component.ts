@@ -2,7 +2,7 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { ApiError } from '../../models/api/api-error.model';
 import { AuthService } from '../../services/auth.service';
@@ -19,7 +19,6 @@ export class LoginPage {
   private readonly authService = inject(AuthService);
   private readonly popupService = inject(PopupMessageService);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
   protected readonly isSubmitting = signal(false);
@@ -45,10 +44,7 @@ export class LoginPage {
       .subscribe({
         next: (response) => {
           if (response.authenticated) {
-            const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-            void this.router.navigateByUrl(isSafeReturnUrl(returnUrl)
-              ? returnUrl
-              : '/purchase-bill/details/items');
+            void this.router.navigateByUrl('/dashboard');
             return;
           }
 
@@ -66,10 +62,6 @@ export class LoginPage {
   protected togglePasswordVisibility(): void {
     this.passwordVisible.update((visible) => !visible);
   }
-}
-
-function isSafeReturnUrl(returnUrl: string | null): returnUrl is string {
-  return returnUrl !== null && returnUrl.startsWith('/') && !returnUrl.startsWith('//');
 }
 
 function isApiError(error: unknown): error is ApiError {
