@@ -755,6 +755,13 @@ Before implementing any feature or making changes:
 - Ask for clarification when an important requirement or API contract is missing.
 - Prefer small, focused changes that fit the existing application.
 
+## 25. Commit Messages
+
+- Prefix development commit messages with `Development - `.
+- Prefix bug-fix commit messages with `Bug fix - `.
+- Use the prefix that matches the primary purpose of the change and keep the remaining message concise and descriptive.
+- Before pushing a commit created for this project, make sure its message uses the appropriate prefix.
+
 ---
 
 **Final Rule:** All new frontend development must follow this `AGENTS.md`, maintain the existing Angular architecture, reuse common components, use Bootstrap for responsive UI, and integrate with the backend through centralized services and environment configuration.
